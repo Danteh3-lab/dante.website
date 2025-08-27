@@ -1,0 +1,35 @@
+[build]
+base = "Dante-website-main"
+command = "npm run build"
+publish = "Dante-website-main/.next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# Optional long-term caching for Next static assets
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Cache public images aggressively
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Cache banners/videos (adjust as needed)
+[[headers]]
+  for = "/banners/*"
+  [headers.values]
+    Cache-Control = "public, max-age=15552000"
+
+# Security headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=(), interest-cohort=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
