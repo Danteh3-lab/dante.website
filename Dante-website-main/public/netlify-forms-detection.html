@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Netlify Forms Detection</title>
+  <meta name="robots" content="noindex" />
+</head>
+<body>
+  <!-- This hidden form allows @netlify/plugin-nextjs v5 to detect your forms at build time. -->
+  <!-- It mirrors the "contact" form used in the app. -->
+  <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <input type="hidden" name="form-name" value="contact" />
+    <p class="hidden">
+      <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+    </p>
+    <p>
+      <label>Full Name: <input type="text" name="name" /></label>
+    </p>
+    <p>
+      <label>Email: <input type="email" name="email" /></label>
+    </p>
+    <p>
+      <label>Company: <input type="text" name="company" /></label>
+    </p>
+    <p>
+      <label>Message: <textarea name="message"></textarea></label>
+    </p>
+    <p>
+      <button type="submit">Send</button>
+    </p>
+  </form>
+</body>
+</html>

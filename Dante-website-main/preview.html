@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dante.dev - Innovative Software Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: #0A0A0F; 
+            color: white; 
+            overflow-x: hidden; 
+            perspective: 1000px;
+        }
+        .animated-bg { 
+            background: linear-gradient(-45deg, #0A0A0F, #0F1419, #1A1B2E, #16213E); 
+            background-size: 400% 400%; 
+            animation: gradientShift 20s ease infinite;
+            position: relative;
+        }
+        .animated-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(0, 191, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(138, 43, 226, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 80%, rgba(255, 20, 147, 0.1) 0%, transparent 50%);
+            animation: pulseGlow 8s ease-in-out infinite;
+        }
+        
+        @keyframes gradientShift { 
+            0% { background-position: 0% 50%; } 
+            50% { background-position: 100% 50%; } 
+            100% { background-position: 0% 50%; } 
+        }
+        
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+        }
+        
+        .glass-card { 
+            background: rgba(255, 255, 255, 0.03); 
+            backdrop-filter: blur(20px); 
+            border: 1px solid rgba(0, 191, 255, 0.2); 
+            border-radius: 1.5rem; 
+            padding: 2rem; 
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 191, 255, 0.1), transparent);
+            transition: left 0.6s;
+        }
+        
+        .glass-card:hover::before {
+            left: 100%;
+        }
+        
+        .glass-card:hover { 
+            background: rgba(0, 191, 255, 0.05); 
+            transform: translateY(-15px) rotateX(10deg) rotateY(5deg) scale(1.02);
+            border-color: rgba(0, 191, 255, 0.4);
+            box-shadow: 0 30px 60px rgba(0, 191, 255, 0.2), 0 0 50px rgba(0, 191, 255, 0.1);
+        }
+        
+        .card-3d {
+            transform-style: preserve-3d;
+            transition: transform 0.3s ease;
+        }
+        
+        .card-3d:hover {
+            transform: rotateY(10deg) rotateX(10deg);
+        }
+        
+        .cube-3d {
+            width: 100px;
+            height: 100px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotateCube 10s infinite linear;
+            margin: 0 auto;
+        }
+        
+        .cube-face {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, rgba(0, 191, 255, 0.3), rgba(138, 43, 226, 0.3));
+            border: 1px solid rgba(0, 191, 255, 0.5);
+            backdrop-filter: blur(10px);
+        }
+        
+        .cube-face.front { transform: rotateY(0deg) translateZ(50px); }
+        .cube-face.back { transform: rotateY(180deg) translateZ(50px); }
+        .cube-face.right { transform: rotateY(90deg) translateZ(50px); }
+        .cube-face.left { transform: rotateY(-90deg) translateZ(50px); }
+        .cube-face.top { transform: rotateX(90deg) translateZ(50px); }
+        .cube-face.bottom { transform: rotateX(-90deg) translateZ(50px); }
+        
+        @keyframes rotateCube {
+            0% { transform: rotateX(0deg) rotateY(0deg); }
+            100% { transform: rotateX(360deg) rotateY(360deg); }
+        }
+        
+        .sphere-3d {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(0, 191, 255, 0.8), rgba(138, 43, 226, 0.4));
+            box-shadow: 
+                inset -20px -20px 50px rgba(0, 0, 0, 0.5),
+                inset 20px 20px 50px rgba(255, 255, 255, 0.1),
+                0 0 50px rgba(0, 191, 255, 0.3);
+            animation: float3D 6s ease-in-out infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes float3D {
+            0%, 100% { 
+                transform: translateY(0px) rotateX(0deg) rotateY(0deg); 
+            }
+            50% { 
+                transform: translateY(-20px) rotateX(180deg) rotateY(180deg); 
+            }
+        }
+        
+        .pyramid-3d {
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 100px solid rgba(0, 191, 255, 0.6);
+            position: relative;
+            margin: 0 auto;
+            animation: pyramidSpin 8s linear infinite;
+            filter: drop-shadow(0 20px 30px rgba(0, 191, 255, 0.3));
+        }
+        
+        @keyframes pyramidSpin {
+            0% { transform: rotateY(0deg) rotateX(0deg); }
+            100% { transform: rotateY(360deg) rotateX(360deg); }
+        }
+        
+        .btn-primary { 
+            background: linear-gradient(135deg, #00BFFF, #1E90FF, #8A2BE2); 
+            color: white; 
+            font-weight: 600; 
+            padding: 1rem 2.5rem; 
+            border-radius: 2rem; 
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+            box-shadow: 0 10px 30px rgba(0, 191, 255, 0.3); 
+            border: none; 
+            cursor: pointer; 
+            text-decoration: none; 
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary:hover { 
+            background: linear-gradient(135deg, #1E90FF, #00BFFF, #FF1493); 
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 191, 255, 0.4);
+        }
+        
+        .gradient-text { 
+            background: linear-gradient(135deg, #00BFFF, #8A2BE2, #FF1493); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent;
+            background-size: 200% 200%;
+            animation: gradientMove 3s ease infinite;
+        }
+        
+        @keyframes gradientMove {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .floating-bg {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px); 
+            animation: float 8s ease-in-out infinite;
+            opacity: 0.6;
+        }
+        
+        @keyframes float { 
+            0%, 100% { transform: translateY(0px) rotate(0deg); } 
+            33% { transform: translateY(-30px) rotate(120deg); }
+            66% { transform: translateY(15px) rotate(240deg); }
+        }
+        
+        .space-object-1 { 
+            top: 15%; 
+            left: 15%; 
+            width: 200px; 
+            height: 200px; 
+            background: radial-gradient(circle at 30% 30%, #FFD700, #FF6347, transparent);
+            border-radius: 50%;
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.5), inset -20px -20px 50px rgba(0,0,0,0.3);
+            animation: planetOrbit 25s linear infinite;
+        }
+        
+        .space-object-2 { 
+            top: 50%; 
+            right: 20%; 
+            width: 150px; 
+            height: 150px; 
+            background: radial-gradient(circle at 40% 40%, #87CEEB, #4169E1, #000080);
+            border-radius: 50%;
+            box-shadow: 0 0 40px rgba(135, 206, 235, 0.6), inset -15px -15px 30px rgba(0,0,0,0.4);
+            animation: planetOrbit 35s linear infinite reverse;
+        }
+        
+        .space-object-3 { 
+            bottom: 25%; 
+            left: 25%; 
+            width: 100px; 
+            height: 100px; 
+            background: radial-gradient(circle at 35% 35%, #FF69B4, #8B008B, #4B0082);
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(255, 105, 180, 0.5), inset -10px -10px 20px rgba(0,0,0,0.5);
+            animation: planetOrbit 20s linear infinite;
+        }
+        
+        .asteroid-belt {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            width: 400px;
+            height: 400px;
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            animation: asteroidRotate 60s linear infinite;
+        }
+
+        .twinkling-stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+
+        .star:nth-child(odd) {
+            animation-delay: 0s;
+            animation-duration: 2.5s;
+        }
+
+        .star:nth-child(even) {
+            animation-delay: 1s;
+            animation-duration: 3.5s;
+        }
+
+        .star:nth-child(3n) {
+            animation-delay: 0.5s;
+            animation-duration: 4s;
+        }
+
+        .star:nth-child(4n) {
+            animation-delay: 1.5s;
+            animation-duration: 2s;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { 
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            50% { 
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+        
+        .asteroid {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #8B7355;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(139, 115, 85, 0.5);
+        }
+        
+        .asteroid:nth-child(1) { top: 0%; left: 50%; animation-delay: 0s; }
+        .asteroid:nth-child(2) { top: 25%; right: 0%; animation-delay: -15s; }
+        .asteroid:nth-child(3) { bottom: 0%; left: 50%; animation-delay: -30s; }
+        .asteroid:nth-child(4) { top: 25%; left: 0%; animation-delay: -45s; }
+        
+        @keyframes planetOrbit {
+            0% { transform: rotate(0deg) translateX(100px) rotate(0deg); }
+            100% { transform: rotate(360deg) translateX(100px) rotate(-360deg); }
+        }
+        
+        @keyframes asteroidRotate {
+            0% { transform: translateX(-50%) rotate(0deg); }
+            100% { transform: translateX(-50%) rotate(360deg); }
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(0, 191, 255, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: particleFloat 6s linear infinite;
+        }
+        
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) scale(1);
+                opacity: 0;
+            }
+        }
+        
+        .typing-animation {
+            overflow: hidden;
+            border-right: 3px solid #00BFFF;
+            white-space: nowrap;
+            animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #00BFFF; }
+        }
+        
+        .service-icon {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(135deg, #00BFFF, #8A2BE2);
+        }
+        
+        .glass-card:hover .service-icon {
+            transform: scale(1.2) rotate(360deg);
+            box-shadow: 0 10px 25px rgba(0, 191, 255, 0.4);
+        }
+        
+        .pricing-card.popular {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 20px rgba(0, 191, 255, 0.4);
+            }
+            to {
+                box-shadow: 0 0 30px rgba(0, 191, 255, 0.8), 0 0 40px rgba(138, 43, 226, 0.4);
+            }
+        }
+        
+        .scroll-indicator {
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        .stagger-5 { animation-delay: 0.5s; }
+        .stagger-6 { animation-delay: 0.6s; }
+    </style>
+</head>
+<body class="animated-bg">
+    <!-- Twinkling Stars Background -->
+    <div class="twinkling-stars"></div>
+    
+    <!-- Header -->
+    <header class="fixed w-full z-50 bg-black bg-opacity-20 backdrop-blur-md py-4">
+        <div class="max-w-7xl mx-auto px-4 flex items-center justify-between">
+            <a href="#" class="text-3xl font-bold gradient-text">Dante.dev</a>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#services" class="text-gray-300 hover:text-green-400 transition-colors">Services</a>
+                <a href="#pricing" class="text-gray-300 hover:text-green-400 transition-colors">Pricing</a>
+                <a href="#contact" class="text-gray-300 hover:text-green-400 transition-colors">Contact</a>
+                <a href="#" class="btn-primary">Get Started</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center pt-20 relative overflow-hidden">
+        <div class="floating-bg space-object-1"></div>
+        <div class="floating-bg space-object-2"></div>
+        <div class="floating-bg space-object-3"></div>
+        
+        <!-- Asteroid Belt -->
+        <div class="asteroid-belt">
+            <div class="asteroid"></div>
+            <div class="asteroid"></div>
+            <div class="asteroid"></div>
+            <div class="asteroid"></div>
+        </div>
+        
+        <!-- Floating Particles -->
+        <div id="particles-container"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 text-center relative z-10">
+            <div class="inline-flex items-center px-4 py-2 bg-white bg-opacity-5 border border-white border-opacity-10 rounded-full mb-6">
+                <span class="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
+                <span class="text-sm text-gray-300">Now Available - Professional Software Solutions</span>
+            </div>
+            
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                Innovative Software<br />
+                <span class="gradient-text">Built for Growth</span>
+            </h1>
+            
+            <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
+                Transform your business with custom applications, web solutions, and automation tools. 
+                Professional development through our subscription-based platform.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+                <a href="#pricing" class="btn-primary">Start Free Trial →</a>
+                <button class="border-2 border-green-400 text-green-400 hover:bg-green-400 hover:text-white px-8 py-3 rounded-xl transition-all">▶ Watch Demo</button>
+            </div>
+
+            <!-- Stats with 3D Elements -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="glass-card text-center card-3d">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-cyan-400 to-purple-500 flex items-center justify-center transform-gpu transition-transform duration-300 hover:scale-110 hover:rotate-12">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 gradient-text">Custom Software</h3>
+                    <p class="text-gray-300">Tailored applications built to your exact specifications and business needs.</p>
+                    <div class="mt-4 h-1 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></div>
+                </div>
+                <div class="glass-card text-center card-3d">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-purple-400 to-pink-500 flex items-center justify-center transform-gpu transition-transform duration-300 hover:scale-110 hover:rotate-12">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 gradient-text">Web Applications</h3>
+                    <p class="text-gray-300">Modern, responsive web apps with cutting-edge technologies and frameworks.</p>
+                    <div class="mt-4 h-1 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></div>
+                </div>
+                <div class="glass-card text-center card-3d">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-blue-400 to-cyan-500 flex items-center justify-center transform-gpu transition-transform duration-300 hover:scale-110 hover:rotate-12">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 gradient-text">Automation Tools</h3>
+                    <p class="text-gray-300">Streamline your workflows with intelligent automation and process optimization.</p>
+                    <div class="mt-4 h-1 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></div>
+                </div>
+                <div class="glass-card text-center card-3d">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-indigo-400 to-purple-500 flex items-center justify-center transform-gpu transition-transform duration-300 hover:scale-110 hover:rotate-12">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M5.5 16a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 16h-8z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 gradient-text">Cloud Solutions</h3>
+                    <p class="text-gray-300">Scalable cloud infrastructure and deployment strategies for modern applications.</p>
+                    <div class="mt-4 h-1 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></div>
+                </div>
+                <div class="glass-card text-center card-3d">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-pink-400 to-purple-500 flex items-center justify-center transform-gpu transition-transform duration-300 hover:scale-110 hover:rotate-12">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 gradient-text">Mobile Development</h3>
+                    <p class="text-gray-300">Cross-platform mobile applications for iOS and Android with native performance.</p>
+                    <div class="mt-4 h-1 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></div>
+                </div>
+                <div class="glass-card text-center card-3d">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 flex items-center justify-center transform-gpu transition-transform duration-300 hover:scale-110 hover:rotate-12">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 gradient-text">Data Analytics</h3>
+                    <p class="text-gray-300">Transform your data into actionable insights with advanced analytics platforms.</p>
+                    <div class="mt-4 h-1 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">Our <span class="gradient-text">Services</span></h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Comprehensive software solutions designed to accelerate your business growth.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="glass-card group hover:scale-105 transition-all">
+                    <div class="flex items-center mb-6">
+                        <div class="p-3 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-xl mr-4">
+                            <svg class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold">Custom Software</h3>
+                    </div>
+                    <p class="text-gray-300 mb-6">Tailored applications built with modern technologies.</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-sm text-gray-400">
+                            <div class="w-1.5 h-1.5 bg-green-400 rounded-full mr-3"></div>
+                            Full-stack development
+                        </li>
+                        <li class="flex items-center text-sm text-gray-400">
+                            <div class="w-1.5 h-1.5 bg-green-400 rounded-full mr-3"></div>
+                            API integrations
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="glass-card group hover:scale-105 transition-all">
+                    <div class="flex items-center mb-6">
+                        <div class="p-3 bg-gradient-to-r from-purple-400 to-pink-500 rounded-xl mr-4">
+                            <svg class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold">Web Applications</h3>
+                    </div>
+                    <p class="text-gray-300 mb-6">Responsive, scalable web solutions.</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-sm text-gray-400">
+                            <div class="w-1.5 h-1.5 bg-green-400 rounded-full mr-3"></div>
+                            React/Next.js apps
+                        </li>
+                        <li class="flex items-center text-sm text-gray-400">
+                            <div class="w-1.5 h-1.5 bg-green-400 rounded-full mr-3"></div>
+                            E-commerce platforms
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="glass-card group hover:scale-105 transition-all">
+                    <div class="flex items-center mb-6">
+                        <div class="p-3 bg-gradient-to-r from-blue-400 to-cyan-500 rounded-xl mr-4">
+                            <svg class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold">Automation Tools</h3>
+                    </div>
+                    <p class="text-gray-300 mb-6">Streamline workflows with intelligent automation.</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-sm text-gray-400">
+                            <div class="w-1.5 h-1.5 bg-green-400 rounded-full mr-3"></div>
+                            Process automation
+                        </li>
+                        <li class="flex items-center text-sm text-gray-400">
+                            <div class="w-1.5 h-1.5 bg-green-400 rounded-full mr-3"></div>
+                            Data processing
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">Simple <span class="gradient-text">Pricing</span></h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Choose the perfect plan for your business needs.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Basic Plan -->
+                <div class="glass-card">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold mb-2">Basic</h3>
+                        <p class="text-gray-400 mb-6">Perfect for startups</p>
+                        <div class="flex items-baseline justify-center">
+                            <span class="text-5xl font-bold gradient-text">$99</span>
+                            <span class="text-gray-400 ml-2">/month</span>
+                        </div>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center">
+                            <svg class="h-5 w-5 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-gray-300">Up to 3 applications</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="h-5 w-5 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-gray-300">Email support</span>
+                        </li>
+                    </ul>
+                    <button class="w-full border-2 border-green-400 text-green-400 hover:bg-green-400 hover:text-white py-3 rounded-xl transition-all">Start Basic Plan</button>
+                </div>
+
+                <!-- Pro Plan -->
+                <div class="glass-card relative border-purple-400 border-2 scale-105 overflow-visible">
+                    <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-purple-400 to-pink-500 px-4 py-2 rounded-full text-sm font-semibold text-white whitespace-nowrap z-10 shadow-lg">
+                        ⭐ Most Popular
+                    </div>
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold mb-2">Pro</h3>
+                        <p class="text-gray-400 mb-6">Ideal for growing businesses</p>
+                        <div class="flex items-baseline justify-center">
+                            <span class="text-5xl font-bold gradient-text">$299</span>
+                            <span class="text-gray-400 ml-2">/month</span>
+                        </div>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center">
+                            <svg class="h-5 w-5 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-gray-300">Up to 10 applications</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="h-5 w-5 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-gray-300">Priority 24/7 support</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="h-5 w-5 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-gray-300">API integrations</span>
+                        </li>
+                    </ul>
+                    <button class="btn-primary w-full">Start Pro Plan</button>
+                </div>
+
+                <!-- Enterprise Plan -->
+                <div class="glass-card">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold mb-2">Enterprise</h3>
+                        <p class="text-gray-400 mb-6">For large organizations</p>
+                        <div class="flex items-baseline justify-center">
+                            <span class="text-5xl font-bold gradient-text">$799</span>
+                            <span class="text-gray-400 ml-2">/month</span>
+                        </div>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center">
+                            <svg class="h-5 w-5 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-gray-300">Unlimited applications</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="h-5 w-5 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-gray-300">Dedicated account manager</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="h-5 w-5 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-gray-300">White-label solutions</span>
+                        </li>
+                    </ul>
+                    <button class="w-full border-2 border-green-400 text-green-400 hover:bg-green-400 hover:text-white py-3 rounded-xl transition-all">Contact Sales</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">Get In <span class="gradient-text">Touch</span></h2>
+            <p class="text-xl text-gray-300 mb-12">
+                Ready to transform your business? Let's discuss your project.
+            </p>
+            
+            <div class="glass-card max-w-2xl mx-auto">
+                <form class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <input type="text" placeholder="Full Name" class="w-full px-4 py-3 bg-white bg-opacity-5 border border-white border-opacity-10 rounded-xl focus:border-green-400 focus:outline-none text-white">
+                        <input type="email" placeholder="Email Address" class="w-full px-4 py-3 bg-white bg-opacity-5 border border-white border-opacity-10 rounded-xl focus:border-green-400 focus:outline-none text-white">
+                    </div>
+                    <input type="text" placeholder="Company" class="w-full px-4 py-3 bg-white bg-opacity-5 border border-white border-opacity-10 rounded-xl focus:border-green-400 focus:outline-none text-white">
+                    <textarea placeholder="Tell us about your project..." rows="5" class="w-full px-4 py-3 bg-white bg-opacity-5 border border-white border-opacity-10 rounded-xl focus:border-green-400 focus:outline-none text-white resize-none"></textarea>
+                    <button type="submit" class="btn-primary w-full">Send Message →</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black bg-opacity-50 border-t border-white border-opacity-10 py-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="text-3xl font-bold gradient-text mb-4">Dante.dev</div>
+            <p class="text-gray-400 mb-8">Professional software development platform</p>
+            <div class="flex justify-center space-x-8 mb-8">
+                <a href="#" class="text-gray-400 hover:text-white transition-colors">Privacy</a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors">Terms</a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors">Support</a>
+            </div>
+            <p class="text-gray-500 text-sm">© 2024 Dante.dev. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Header background on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.background = 'rgba(0, 0, 0, 0.8)';
+                header.style.backdropFilter = 'blur(20px)';
+            } else {
+                header.style.background = 'rgba(0, 0, 0, 0.2)';
+                header.style.backdropFilter = 'blur(16px)';
+            }
+        });
+
+        // Create floating particles
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            // Random size between 2-8px
+            const size = Math.random() * 6 + 2;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            
+            // Random horizontal position
+            particle.style.left = Math.random() * 100 + '%';
+            
+            // Random color from blue spectrum
+            const colors = ['rgba(0, 191, 255, 0.8)', 'rgba(138, 43, 226, 0.6)', 'rgba(255, 20, 147, 0.7)'];
+            particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+            
+            // Random animation duration
+            particle.style.animationDuration = (Math.random() * 4 + 3) + 's';
+            particle.style.animationDelay = Math.random() * 2 + 's';
+            
+            document.getElementById('particles-container').appendChild(particle);
+            
+            // Remove particle after animation
+            setTimeout(() => {
+                if (particle.parentNode) {
+                    particle.parentNode.removeChild(particle);
+                }
+            }, 8000);
+        }
+
+        // Create particles continuously
+        setInterval(createParticle, 300);
+
+        // Add floating up animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes floatUp {
+                0% {
+                    transform: translateY(0) rotate(0deg);
+                    opacity: 0;
+                }
+                10% {
+                    opacity: 1;
+                }
+                90% {
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateY(-100vh) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Create floating icons
+        setInterval(createFloatingIcon, 2000);
+
+        // Mouse trail effect
+        let mouseTrail = [];
+        document.addEventListener('mousemove', (e) => {
+            mouseTrail.push({
+                x: e.clientX,
+                y: e.clientY,
+                time: Date.now()
+            });
+
+            // Keep only recent trail points
+            mouseTrail = mouseTrail.filter(point => Date.now() - point.time < 1000);
+
+            // Create trail particles
+            if (Math.random() < 0.1) {
+                const trailParticle = document.createElement('div');
+                trailParticle.style.position = 'fixed';
+                trailParticle.style.left = e.clientX + 'px';
+                trailParticle.style.top = e.clientY + 'px';
+                trailParticle.style.width = '4px';
+                trailParticle.style.height = '4px';
+                trailParticle.style.background = 'rgba(0, 191, 255, 0.6)';
+                trailParticle.style.borderRadius = '50%';
+                trailParticle.style.pointerEvents = 'none';
+                trailParticle.style.zIndex = '1000';
+                trailParticle.style.animation = 'fadeOut 0.5s ease-out forwards';
+                
+                document.body.appendChild(trailParticle);
+                
+                setTimeout(() => {
+                    if (trailParticle.parentNode) {
+                        trailParticle.parentNode.removeChild(trailParticle);
+                    }
+                }, 500);
+            }
+        });
+
+        // Add fadeOut animation for mouse trail
+        const fadeOutStyle = document.createElement('style');
+        fadeOutStyle.textContent = `
+            @keyframes fadeOut {
+                0% {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+                100% {
+                    opacity: 0;
+                    transform: scale(0);
+                }
+            }
+        `;
+        document.head.appendChild(fadeOutStyle);
+
+        // Create twinkling stars
+        function createStars() {
+            const starsContainer = document.querySelector('.twinkling-stars');
+            const numberOfStars = 150;
+
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                // Random position
+                const x = Math.random() * 100;
+                const y = Math.random() * 100;
+                
+                // Random size (1-4px)
+                const size = Math.random() * 3 + 1;
+                
+                // Random opacity
+                const opacity = Math.random() * 0.8 + 0.2;
+                
+                star.style.left = x + '%';
+                star.style.top = y + '%';
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.opacity = opacity;
+                
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Initialize stars when page loads
+        window.addEventListener('load', createStars);
+    </script>
+</body>
+</html>
