@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next'
 
-const baseUrl = new URL('https://dante-dev.netlify.app')
+const baseUrl = new URL('https://novaware.netlify.app')
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = ['/', '/about', '/portfolio', '/dashboard'].map((path) => ({

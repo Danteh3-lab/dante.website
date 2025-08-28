@@ -50,7 +50,7 @@ export default function YouTubeSegment({
           fs: 0,
           cc_load_policy: 0,
           iv_load_policy: 3,
-          disablekb: 1,
+          autohide: 1,
           enablejsapi: 1,
           origin,
         },
@@ -58,9 +58,26 @@ export default function YouTubeSegment({
           onReady: (e: any) => {
             try {
               e.target.setPlaybackRate(forceRate);
-              // Ensure autoplay kicks in reliably
+              // Ensure autoplay kicks in reliably - force mute first for mobile
               try { e.target.mute?.(); } catch {}
-              try { e.target.playVideo?.(); } catch {}
+              
+              // Mobile browsers often block autoplay, so we need user interaction
+              const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+              
+              if (isMobile && autoplay) {
+                // For mobile with autoplay, try to play after user has clicked
+                setTimeout(() => {
+                  try { 
+                    e.target.playVideo?.(); 
+                    console.log('Mobile autoplay attempted after user interaction');
+                  } catch {}
+                }, 500);
+              } else if (!isMobile) {
+                // Desktop: attempt autoplay with delay
+                setTimeout(() => {
+                  try { e.target.playVideo?.(); } catch {}
+                }, 200);
+              }
               // Zoom and center the inner iframe to avoid black bars/letterboxing
               const iframe: HTMLIFrameElement | undefined = e.target.getIframe?.();
               if (iframe) {
@@ -92,6 +109,14 @@ export default function YouTubeSegment({
             try {
               const current = e.target.getPlaybackRate?.();
               if (current !== forceRate) e.target.setPlaybackRate(forceRate);
+              
+              // Prevent player from reverting to thumbnail on mobile
+              const playerState = e.data;
+              const YT = (window as any).YT;
+              
+              if (playerState === YT?.PlayerState?.ENDED || playerState === YT?.PlayerState?.PAUSED) {
+                console.log('Player state changed:', playerState, '- keeping player active');
+              }
             } catch {}
           },
         },

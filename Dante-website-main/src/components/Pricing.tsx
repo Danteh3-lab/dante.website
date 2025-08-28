@@ -3,6 +3,8 @@
 import { CheckIcon, StarIcon } from '@heroicons/react/24/solid';
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
 import { useState } from 'react';
+import ScrollReveal from './ScrollReveal';
+import StaggeredReveal from './StaggeredReveal';
 
 const plans = [
   {
@@ -64,36 +66,43 @@ export default function Pricing() {
   return (
     <section id="pricing" className="py-20">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="section-title">
-            Simple <span className="gradient-text">Pricing</span>
-          </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
-            Choose the perfect plan for your business needs. All plans include our core features 
-            with no hidden fees.
-          </p>
-          
-          <div className="inline-flex items-center bg-white/5 backdrop-blur-sm border border-white/10 rounded-full p-1">
-            <button
-              onClick={() => setBillingCycle('monthly')}
-              className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
-                billingCycle === 'monthly' ? 'bg-primary text-white' : 'text-gray-300 hover:text-white'
-              }`}
-            >
-              Monthly
-            </button>
-            <button
-              onClick={() => setBillingCycle('annual')}
-              className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
-                billingCycle === 'annual' ? 'bg-primary text-white' : 'text-gray-300 hover:text-white'
-              }`}
-            >
-              Annual (Save 20%)
-            </button>
+        <ScrollReveal direction="up" duration={800}>
+          <div className="text-center mb-16">
+            <h2 className="section-title">
+              Simple <span className="gradient-text">Pricing</span>
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+              Choose the perfect plan for your business needs. All plans include our core features 
+              with no hidden fees.
+            </p>
+            
+            <div className="inline-flex items-center bg-white/5 backdrop-blur-sm border border-white/10 rounded-full p-1">
+              <button
+                onClick={() => setBillingCycle('monthly')}
+                className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
+                  billingCycle === 'monthly' ? 'bg-primary text-white' : 'text-gray-300 hover:text-white'
+                }`}
+              >
+                Monthly
+              </button>
+              <button
+                onClick={() => setBillingCycle('annual')}
+                className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
+                  billingCycle === 'annual' ? 'bg-primary text-white' : 'text-gray-300 hover:text-white'
+                }`}
+              >
+                Annual (Save 20%)
+              </button>
+            </div>
           </div>
-        </div>
+        </ScrollReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <StaggeredReveal
+          staggerDelay={150}
+          direction="up"
+          duration={700}
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto"
+        >
           {plans.map((plan, index) => (
             <div
               key={plan.name}
@@ -147,18 +156,20 @@ export default function Pricing() {
               </button>
             </div>
           ))}
-        </div>
+        </StaggeredReveal>
 
-        <div className="text-center mt-16">
-          <p className="text-gray-400 mb-6">
-            All plans include a 14-day free trial. No credit card required.
-          </p>
-          <div className="flex flex-wrap justify-center gap-8 text-sm text-gray-500">
-            <span>✓ Cancel anytime</span>
-            <span>✓ 30-day money-back guarantee</span>
-            <span>✓ Free migration assistance</span>
+        <ScrollReveal direction="up" delay={400} duration={700}>
+          <div className="text-center mt-16">
+            <p className="text-gray-400 mb-6">
+              All plans include a 14-day free trial. No credit card required.
+            </p>
+            <div className="flex flex-wrap justify-center gap-8 text-sm text-gray-500">
+              <span>✓ Cancel anytime</span>
+              <span>✓ 30-day money-back guarantee</span>
+              <span>✓ Free migration assistance</span>
+            </div>
           </div>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );

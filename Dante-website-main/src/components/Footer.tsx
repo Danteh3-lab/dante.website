@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import LiteYouTube from './LiteYouTube';
 
 const footerLinks = {
   product: [
@@ -21,10 +20,10 @@ const footerLinks = {
     { name: 'GDPR', href: '/gdpr' },
   ],
   social: [
-    { name: 'Twitter', href: 'https://twitter.com/dantedev' },
-    { name: 'LinkedIn', href: 'https://linkedin.com/company/dantedev' },
-    { name: 'GitHub', href: 'https://github.com/dantedev' },
-    { name: 'Discord', href: 'https://discord.gg/dantedev' },
+    { name: 'Twitter', href: 'https://twitter.com/novaware' },
+    { name: 'LinkedIn', href: 'https://linkedin.com/company/novaware' },
+    { name: 'GitHub', href: 'https://github.com/novaware' },
+    { name: 'Discord', href: 'https://discord.gg/novaware' },
   ],
 };
 
@@ -38,7 +37,7 @@ export default function Footer() {
           {/* Brand Section */}
           <div className="lg:col-span-2">
             <Link href="/" className="text-3xl font-bold gradient-text mb-4 inline-block">
-              Dante.dev
+              Novaware
             </Link>
             <p className="text-gray-300 mb-6 max-w-md">
               Professional software development platform delivering innovative solutions 
@@ -61,33 +60,6 @@ export default function Footer() {
               ))}
             </div>
 
-            {/* Featured Video Embed */}
-            <div className="mt-6">
-              <h4 className="text-sm font-semibold text-white/90 mb-2">Featured Video</h4>
-              <div className="glow-frame">
-                <div className="glow-inner relative bg-gradient-to-br from-gray-900 to-gray-800">
-                  <div className="aspect-video relative">
-                    <LiteYouTube
-                      videoId="JPh7Pf1z7gE"
-                      start={2923}
-                      end={2935}
-                    />
-                  </div>
-                </div>
-              </div>
-              <p className="mt-2 text-xs text-gray-400">
-                Segment 48:43–48:55 at 2× speed • Watch the full video{' '}
-                <a
-                  href="https://www.youtube.com/watch?v=JPh7Pf1z7gE"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="underline hover:text-white"
-                >
-                  here
-                </a>
-                .
-              </p>
-            </div>
           </div>
 
           {/* Product Links */}
@@ -146,7 +118,7 @@ export default function Footer() {
         <div className="border-t border-white/10 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm">
-              © 2025 Dante.dev. All rights reserved.
+              © 2025 Novaware. All rights reserved.
             </p>
             <div className="flex items-center space-x-6 mt-4 md:mt-0">
               <span className="text-sm text-gray-400">Built with ❤️ using Next.js</span>

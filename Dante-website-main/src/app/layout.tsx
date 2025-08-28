@@ -7,17 +7,17 @@ import React from 'react'
 
 const inter = Inter({ subsets: ['latin'] })
 
-const canonical = new URL('https://dante-dev.netlify.app')
+const canonical = new URL('https://novaware.netlify.app')
 
 export const metadata: Metadata = {
   metadataBase: canonical,
   title: {
-    default: 'Dante.dev – Innovative Software Solutions',
-    template: '%s | Dante.dev',
+    default: 'Novaware – Innovative Software Solutions',
+    template: '%s | Novaware',
   },
   description:
     'Professional software development platform offering custom applications, web solutions, and automation tools through subscription-based services.',
-  applicationName: 'Dante.dev',
+  applicationName: 'Novaware',
   icons: {
     icon: [
       { url: '/favicon.ico' },
@@ -27,8 +27,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     url: canonical,
-    siteName: 'Dante.dev',
-    title: 'Dante.dev – Innovative Software Solutions',
+    siteName: 'Novaware',
+    title: 'Novaware – Innovative Software Solutions',
     description:
       'Professional software development platform offering custom applications, web solutions, and automation tools through subscription-based services.',
     images: [
@@ -36,15 +36,15 @@ export const metadata: Metadata = {
         url: '/images/og-cover.png',
         width: 1200,
         height: 630,
-        alt: 'Dante.dev',
+        alt: 'Novaware',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    site: '@dante_dev',
-    creator: '@dante_dev',
-    title: 'Dante.dev – Innovative Software Solutions',
+    site: '@novaware',
+    creator: '@novaware',
+    title: 'Novaware – Innovative Software Solutions',
     description:
       'Professional software development platform offering custom applications, web solutions, and automation tools through subscription-based services.',
     images: ['/images/og-cover.png'],
@@ -93,7 +93,7 @@ export default function RootLayout({
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'Organization',
-              name: 'Dante.dev',
+              name: 'Novaware',
               url: canonical.toString(),
               logo: new URL('/images/og-cover.png', canonical).toString(),
             }),

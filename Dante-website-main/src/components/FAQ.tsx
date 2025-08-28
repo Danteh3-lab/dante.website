@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
+import ScrollReveal from './ScrollReveal';
+import StaggeredReveal from './StaggeredReveal';
 
 const faqs = [
   {
@@ -48,19 +50,26 @@ export default function FAQ() {
   return (
     <section id="faq" className="py-20">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="section-title">
-            Frequently Asked <span className="gradient-text">Questions</span>
-          </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Get answers to common questions about our services, pricing, and development process.
-          </p>
-        </div>
+        <ScrollReveal direction="up" duration={800}>
+          <div className="text-center mb-16">
+            <h2 className="section-title">
+              Frequently Asked <span className="gradient-text">Questions</span>
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Get answers to common questions about our services, pricing, and development process.
+            </p>
+          </div>
+        </ScrollReveal>
 
         <div className="max-w-4xl mx-auto">
-          {faqs.map((faq, index) => (
-            <div key={index} className="mb-4">
-              <div className="glass-card">
+          <StaggeredReveal
+            staggerDelay={100}
+            direction="up"
+            duration={600}
+            className="space-y-4"
+          >
+            {faqs.map((faq, index) => (
+              <div key={index} className="glass-card">
                 <button
                   onClick={() => toggleFAQ(index)}
                   className="w-full text-left flex items-center justify-between p-6 focus:outline-none"
@@ -86,21 +95,23 @@ export default function FAQ() {
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </StaggeredReveal>
         </div>
 
-        <div className="text-center mt-16">
-          <div className="glass-card max-w-2xl mx-auto">
-            <h3 className="text-2xl font-bold mb-4">Still have questions?</h3>
-            <p className="text-gray-300 mb-6">
-              Our team is here to help. Get in touch and we'll answer any questions you have about our services.
-            </p>
-            <button className="btn-primary">
-              Contact Support
-            </button>
+        <ScrollReveal direction="up" delay={400} duration={700}>
+          <div className="text-center mt-16">
+            <div className="glass-card max-w-2xl mx-auto">
+              <h3 className="text-2xl font-bold mb-4">Still have questions?</h3>
+              <p className="text-gray-300 mb-6">
+                Our team is here to help. Get in touch and we'll answer any questions you have about our services.
+              </p>
+              <button className="btn-primary">
+                Contact Support
+              </button>
+            </div>
           </div>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );

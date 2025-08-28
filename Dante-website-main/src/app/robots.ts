@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next'
 
 export default function robots(): MetadataRoute.Robots {
-  const base = 'https://dante-dev.netlify.app'
+  const base = 'https://novaware.netlify.app'
   return {
     rules: {
       userAgent: '*',

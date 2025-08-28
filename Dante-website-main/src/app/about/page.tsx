@@ -10,7 +10,7 @@ export default function AboutPage() {
         <section className="container">
           <h1 className="section-title">About</h1>
           <p className="text-gray-300 max-w-2xl">
-            We build modern, reliable software with a focus on quality and velocity. Meet the team behind Dante.dev.
+            We build modern, reliable software with a focus on quality and velocity. Meet the team behind Novaware.
           </p>
         </section>
         <Team />

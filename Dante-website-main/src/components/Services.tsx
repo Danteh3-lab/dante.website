@@ -5,6 +5,8 @@ import React from 'react';
 
 import LiteYouTube from './LiteYouTube';
 import { Code2, Globe2, Settings, Cloud, Smartphone, BarChart3 } from 'lucide-react';
+import ScrollReveal from './ScrollReveal';
+import StaggeredReveal from './StaggeredReveal';
 
 const services = [
   {
@@ -192,93 +194,110 @@ export default function Services() {
   return (
     <section id="services" className="py-20">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="section-title">
-            Our <span className="gradient-text">Services</span>
-          </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Comprehensive software solutions designed to accelerate your business growth 
-            and digital transformation journey.
-          </p>
-        </div>
+        <ScrollReveal direction="up" duration={800}>
+          <div className="text-center mb-16">
+            <h2 className="section-title">
+              Our <span className="gradient-text">Services</span>
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Comprehensive software solutions designed to accelerate your business growth 
+              and digital transformation journey.
+            </p>
+          </div>
+        </ScrollReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <StaggeredReveal
+          staggerDelay={100}
+          direction="up"
+          duration={600}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
           {services.map((service, index) => (
             <ServiceCard key={service.title} service={service} index={index} />
           ))}
-        </div>
+        </StaggeredReveal>
 
         {/* Video Showcase Section */}
-        <div className="mt-20">
-          <div className="text-center mb-12">
-            <h3 className="text-3xl font-bold mb-4">
-              See Our <span className="gradient-text">Development Process</span> in Action
-            </h3>
-            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              Watch how we transform ideas into powerful software solutions with modern development practices and cutting-edge technologies.
-            </p>
-          </div>
+        <ScrollReveal direction="up" delay={200} duration={800}>
+          <div className="mt-20">
+            <div className="text-center mb-12">
+              <h3 className="text-3xl font-bold mb-4">
+                See Our <span className="gradient-text">Development Process</span> in Action
+              </h3>
+              <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+                Watch how we transform ideas into powerful software solutions with modern development practices and cutting-edge technologies.
+              </p>
+            </div>
 
-          <div className="max-w-4xl mx-auto">
-            <div className="group transition-transform duration-300 hover:scale-105">
-              <div className="glow-frame">
-                <div className="glow-inner relative bg-gradient-to-br from-gray-900 to-gray-800">
-                  <div className="aspect-video relative">
-                    <LiteYouTube
-                      videoId="JPh7Pf1z7gE"
-                      start={2923}
-                      end={2935}
-                      autoplay
-                      muted
-                      forceRate={2}
-                    />
-                  </div>
+            <ScrollReveal direction="up" delay={400} duration={700}>
+              <div className="max-w-4xl mx-auto">
+                <div className="group transition-transform duration-300 hover:scale-105">
+                  <div className="glow-frame">
+                    <div className="glow-inner relative bg-gradient-to-br from-gray-900 to-gray-800">
+                      <div className="aspect-video relative">
+                        <LiteYouTube
+                          videoId="JPh7Pf1z7gE"
+                          start={2923}
+                          end={2935}
+                          autoplay
+                          muted
+                          forceRate={2}
+                        />
+                      </div>
 
-                  {/* Video info overlay */}
-                  <div className="absolute bottom-4 left-4 flex items-end z-10">
-                    <div className="text-white">
-                      <div className="text-sm font-medium">Live Coding Session</div>
-                      <div className="text-xs text-gray-300">Building a React + Node.js Application</div>
+                      {/* Video info overlay */}
+                      <div className="absolute bottom-4 left-4 flex items-end z-10">
+                        <div className="text-white">
+                          <div className="text-sm font-medium">Live Coding Session</div>
+                          <div className="text-xs text-gray-300">Building a React + Node.js Application</div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
 
-            {/* Video features */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-              <div className="text-center">
-                <div className="w-12 h-12 bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 bg-[length:200%_200%] animate-gradient rounded-lg mx-auto mb-3 flex items-center justify-center">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="text-white">
-                    <path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0L19.2 12l-4.6-4.6L16 6l6 6-6 6-1.4-1.4z" />
-                  </svg>
-                </div>
-                <h4 className="font-semibold text-white mb-2">Clean Code Practices</h4>
-                <p className="text-sm text-gray-400">Watch how we write maintainable, scalable code following industry best practices.</p>
+                {/* Video features */}
+                <StaggeredReveal
+                  staggerDelay={150}
+                  direction="up"
+                  duration={600}
+                  className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8"
+                >
+                  {[
+                    {
+                      icon: "M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0L19.2 12l-4.6-4.6L16 6l6 6-6 6-1.4-1.4z",
+                      gradient: "from-green-400 via-blue-500 to-purple-600",
+                      title: "Clean Code Practices",
+                      description: "Watch how we write maintainable, scalable code following industry best practices."
+                    },
+                    {
+                      icon: "M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z",
+                      gradient: "from-orange-400 via-red-500 to-pink-600",
+                      title: "Modern Workflow",
+                      description: "See our development process from planning to deployment with modern tools."
+                    },
+                    {
+                      icon: "M13 2L3 14H12L11 22L21 10H12L13 2Z",
+                      gradient: "from-cyan-400 via-teal-500 to-blue-600",
+                      title: "Real-Time Results",
+                      description: "Experience the immediate impact of professional development techniques."
+                    }
+                  ].map((feature, index) => (
+                    <div key={index} className="text-center">
+                      <div className={`w-12 h-12 bg-gradient-to-r ${feature.gradient} bg-[length:200%_200%] animate-gradient rounded-lg mx-auto mb-3 flex items-center justify-center`}>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="text-white">
+                          <path d={feature.icon} />
+                        </svg>
+                      </div>
+                      <h4 className="font-semibold text-white mb-2">{feature.title}</h4>
+                      <p className="text-sm text-gray-400">{feature.description}</p>
+                    </div>
+                  ))}
+                </StaggeredReveal>
               </div>
-
-              <div className="text-center">
-                <div className="w-12 h-12 bg-gradient-to-r from-orange-400 via-red-500 to-pink-600 bg-[length:200%_200%] animate-gradient rounded-lg mx-auto mb-3 flex items-center justify-center">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="text-white">
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                  </svg>
-                </div>
-                <h4 className="font-semibold text-white mb-2">Modern Workflow</h4>
-                <p className="text-sm text-gray-400">See our development process from planning to deployment with modern tools.</p>
-              </div>
-
-              <div className="text-center">
-                <div className="w-12 h-12 bg-gradient-to-r from-cyan-400 via-teal-500 to-blue-600 bg-[length:200%_200%] animate-gradient rounded-lg mx-auto mb-3 flex items-center justify-center">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="text-white">
-                    <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" />
-                  </svg>
-                </div>
-                <h4 className="font-semibold text-white mb-2">Real-Time Results</h4>
-                <p className="text-sm text-gray-400">Experience the immediate impact of professional development techniques.</p>
-              </div>
-            </div>
+            </ScrollReveal>
           </div>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );

@@ -8,6 +8,8 @@ import {
   MapPinIcon,
   PaperAirplaneIcon 
 } from '@heroicons/react/24/outline';
+import ScrollReveal from './ScrollReveal';
+import StaggeredReveal from './StaggeredReveal';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -82,80 +84,75 @@ export default function Contact() {
   return (
     <section id="contact" className="py-20">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="section-title">
-            Get In <span className="gradient-text">Touch</span>
-          </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Ready to transform your business with custom software solutions? 
-            Let's discuss your project and find the perfect plan for your needs.
-          </p>
-        </div>
+        <ScrollReveal direction="up" duration={800}>
+          <div className="text-center mb-16">
+            <h2 className="section-title">
+              Get In <span className="gradient-text">Touch</span>
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Ready to transform your business with custom software solutions? 
+              Let's discuss your project and find the perfect plan for your needs.
+            </p>
+          </div>
+        </ScrollReveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
           {/* Contact Information */}
-          <div>
+          <ScrollReveal direction="left" delay={200} duration={700}>
             <div className="glass-card">
               <h3 className="text-2xl font-bold mb-8">Let's Start a Conversation</h3>
               
-              <div className="space-y-6">
-                <div className="flex items-center">
-                  <div className="p-3 bg-gradient-to-r from-primary to-accent rounded-xl mr-4">
-                    <EnvelopeIcon className="h-6 w-6 text-white" />
+              <StaggeredReveal
+                staggerDelay={100}
+                direction="up"
+                duration={500}
+                className="space-y-6"
+              >
+                {[
+                  { icon: EnvelopeIcon, label: "Email", value: "hello@novaware.com" },
+                  { icon: PhoneIcon, label: "Phone", value: "+1 (555) 123-4567" },
+                  { icon: MapPinIcon, label: "Location", value: "San Francisco, CA" }
+                ].map((contact, index) => (
+                  <div key={index} className="flex items-center">
+                    <div className="p-3 bg-gradient-to-r from-primary to-accent rounded-xl mr-4">
+                      <contact.icon className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <p className="font-semibold">{contact.label}</p>
+                      <p className="text-gray-300">{contact.value}</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="font-semibold">Email</p>
-                    <p className="text-gray-300">hello@dante.dev</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-center">
-                  <div className="p-3 bg-gradient-to-r from-primary to-accent rounded-xl mr-4">
-                    <PhoneIcon className="h-6 w-6 text-white" />
-                  </div>
-                  <div>
-                    <p className="font-semibold">Phone</p>
-                    <p className="text-gray-300">+1 (555) 123-4567</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-center">
-                  <div className="p-3 bg-gradient-to-r from-primary to-accent rounded-xl mr-4">
-                    <MapPinIcon className="h-6 w-6 text-white" />
-                  </div>
-                  <div>
-                    <p className="font-semibold">Location</p>
-                    <p className="text-gray-300">San Francisco, CA</p>
-                  </div>
-                </div>
-              </div>
+                ))}
+              </StaggeredReveal>
 
-              <div className="mt-8 pt-8 border-t border-white/10">
-                <h4 className="font-semibold mb-4">Why Choose Dante.dev?</h4>
-                <ul className="space-y-3 text-gray-300">
-                  <li className="flex items-center">
-                    <div className="w-2 h-2 bg-primary rounded-full mr-3"></div>
-                    Expert development team
-                  </li>
-                  <li className="flex items-center">
-                    <div className="w-2 h-2 bg-primary rounded-full mr-3"></div>
-                    Transparent pricing
-                  </li>
-                  <li className="flex items-center">
-                    <div className="w-2 h-2 bg-primary rounded-full mr-3"></div>
-                    24/7 support available
-                  </li>
-                  <li className="flex items-center">
-                    <div className="w-2 h-2 bg-primary rounded-full mr-3"></div>
-                    Proven track record
-                  </li>
-                </ul>
-              </div>
+              <ScrollReveal direction="up" delay={600} duration={600}>
+                <div className="mt-8 pt-8 border-t border-white/10">
+                  <h4 className="font-semibold mb-4">Why Choose Novaware?</h4>
+                  <StaggeredReveal
+                    staggerDelay={80}
+                    direction="up"
+                    duration={400}
+                    className="space-y-3 text-gray-300"
+                  >
+                    {[
+                      "Expert development team",
+                      "Transparent pricing", 
+                      "24/7 support available",
+                      "Proven track record"
+                    ].map((benefit, index) => (
+                      <li key={index} className="flex items-center">
+                        <div className="w-2 h-2 bg-primary rounded-full mr-3"></div>
+                        {benefit}
+                      </li>
+                    ))}
+                  </StaggeredReveal>
+                </div>
+              </ScrollReveal>
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* Contact Form */}
-          <div>
+          <ScrollReveal direction="right" delay={400} duration={700}>
             <form 
               name="contact"
               method="POST"
@@ -275,7 +272,7 @@ export default function Contact() {
                 )}
               </div>
             </form>
-          </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

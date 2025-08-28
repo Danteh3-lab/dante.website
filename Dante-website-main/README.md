@@ -1,4 +1,4 @@
-# Dante.dev - Personal Website with Authentication
+# Novaware - Personal Website with Authentication
 
 A modern Next.js website with Supabase authentication integration.
 
