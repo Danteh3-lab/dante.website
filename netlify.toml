@@ -1,7 +1,7 @@
 [build]
 base = "Dante-website-main"
 command = "npm run build"
-publish = "Dante-website-main/.next"
+publish = "Dante-website-main/out"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
